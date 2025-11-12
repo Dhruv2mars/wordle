@@ -1,15 +1,10 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Box, Text, useInput } from 'ink';
 
 type Props = { onStart: () => void };
 
 export function Splash({ onStart }: Props) {
   useInput(() => onStart());
-  useEffect(() => {
-    // Auto-start if no input after a short delay
-    const id = setTimeout(onStart, 1500);
-    return () => clearTimeout(id);
-  }, [onStart]);
 
   return (
     <Box flexDirection="column" alignItems="center" justifyContent="center" height={Math.max(10, process.stdout.rows - 4)}>
