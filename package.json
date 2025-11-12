@@ -1,0 +1,57 @@
+{
+  "name": "wordie-cli",
+  "version": "0.0.1",
+  "private": false,
+  "description": "Wordie: a beautifully animated Wordle-like game for the terminal.",
+  "bin": {
+    "wordie": "dist/cli.js"
+  },
+  "type": "module",
+  "main": "dist/cli.js",
+  "files": [
+    "dist",
+    "assets",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "dev": "bun run --hot src/dev.ts",
+    "build": "bun x tsup --config tsup.config.ts",
+    "start": "node dist/cli.js",
+    "typecheck": "bun x tsc --noEmit",
+    "lint": "bun x eslint . --ext .ts,.tsx"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "bun": ">=1.1.0"
+  },
+  "keywords": [
+    "cli",
+    "game",
+    "ink",
+    "terminal",
+    "wordle",
+    "wordie"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "ink": "^4.4.1",
+    "react": "^18.2.0",
+    "chalk": "^5.3.0",
+    "kleur": "^4.1.5",
+    "ansi-escapes": "^6.2.0",
+    "string-width": "^7.1.0",
+    "slice-ansi": "^7.1.0"
+  },
+  "devDependencies": {
+    "tsup": "^8.0.1",
+    "typescript": "^5.6.2",
+    "@types/node": "^20.11.30",
+    "@types/react": "^18.2.28",
+    "eslint": "^9.11.0",
+    "@typescript-eslint/eslint-plugin": "^7.6.0",
+    "@typescript-eslint/parser": "^7.6.0"
+  }
+}
+
