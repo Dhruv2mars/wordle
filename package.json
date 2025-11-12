@@ -15,7 +15,7 @@
     "LICENSE"
   ],
   "scripts": {
-    "dev": "bun run src/cli.ts",
+    "dev": "bun run src/cli.tsx",
     "build": "bun x tsup --config tsup.config.ts",
     "start": "bun run build && node dist/cli.js",
     "typecheck": "bun x tsc --noEmit",
