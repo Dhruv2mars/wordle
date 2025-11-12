@@ -11,6 +11,9 @@ export function App() {
     if (key.ctrl && (input === 'q' || input === 'Q')) {
       exit();
     }
+    if (key.escape && scene === 'game') {
+      setScene('splash');
+    }
   });
   return (
     <Box flexDirection="column" width={process.stdout.columns || 80}>
