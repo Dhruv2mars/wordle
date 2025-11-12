@@ -52,20 +52,29 @@ export function Game() {
   const [rows, setRows] = useState<string[]>([]);
   const [current, setCurrent] = useState('');
   const [states, setStates] = useState<CellState[][]>([]);
-  const done = rows.length > 0 && (rows[rows.length - 1] === answer || rows.length === MAX_ROWS);
+  const [message, setMessage] = useState<string>('');
+  const [win, setWin] = useState(false);
+  const done = win || rows.length === MAX_ROWS;
 
   useInput((input, key) => {
     if (done) return;
     if (key.return) {
-      if (current.length === WORD_LEN) {
-        const guess = current.toUpperCase();
-        if (allowed.includes(guess.toUpperCase())) {
-          const s = scoreGuess(guess, answer) as CellState[];
-          setRows(r => [...r, guess]);
-          setStates(st => [...st, s]);
-          setCurrent('');
-        }
+      if (current.length < WORD_LEN) {
+        setMessage('Not enough letters');
+        return;
       }
+      const guess = current.toUpperCase();
+      // Accept any A–Z 5-letter word for now; TODO: full dictionary validation
+      if (!/^[A-Z]{5}$/.test(guess)) {
+        setMessage('Invalid characters');
+        return;
+      }
+      const s = scoreGuess(guess, answer) as CellState[];
+      setRows(r => [...r, guess]);
+      setStates(st => [...st, s]);
+      setCurrent('');
+      setMessage('');
+      if (guess === answer) setWin(true);
       return;
     }
     if (key.backspace || key.delete) {
@@ -74,6 +83,7 @@ export function Game() {
     }
     if (/^[a-zA-Z]$/.test(input) && current.length < WORD_LEN) {
       setCurrent(c => (c + input).toUpperCase());
+      setMessage('');
     }
   });
 
@@ -100,9 +110,10 @@ export function Game() {
         ))}
       </Box>
       <Box marginTop={1}>
-        <Text dimColor>{done ? 'Game over — press Ctrl+C' : 'Type letters, Enter to submit, Backspace to edit'}</Text>
+        <Text color={message ? '#b59f3b' : undefined} dimColor={!message}>
+          {message || (done ? (win ? 'You win! — Ctrl+C to exit' : 'Out of rows — Ctrl+C to exit') : 'Type letters, Enter to submit, Backspace to edit')}
+        </Text>
       </Box>
     </Box>
   );
 }
-
