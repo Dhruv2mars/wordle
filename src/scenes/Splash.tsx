@@ -1,26 +1,27 @@
-import React, { useEffect, useState } from 'react';
-import { Box, Text } from 'ink';
-import { Surface } from '../surface/Surface';
+import React, { useEffect } from 'react';
+import { Box, Text, useInput } from 'ink';
 
-export function Splash() {
-  // Simple animated logo with gradient background to validate pipeline.
-  const [ready, setReady] = useState(false);
+type Props = { onStart: () => void };
+
+export function Splash({ onStart }: Props) {
+  useInput(() => onStart());
   useEffect(() => {
-    const id = setTimeout(() => setReady(true), 1000);
+    // Auto-start if no input after a short delay
+    const id = setTimeout(onStart, 1500);
     return () => clearTimeout(id);
-  }, []);
+  }, [onStart]);
 
   return (
-    <Box flexDirection="column">
-      <Box>
-        <Text>Wordie</Text>
-      </Box>
-      <Box height={8}>
-        <Surface width={40} height={8} fps={60} kind="gradient" />
-      </Box>
-      {ready && (
-        <Box marginTop={1}><Text color="gray">Press any key to start...</Text></Box>
-      )}
+    <Box flexDirection="column" alignItems="center" justifyContent="center" height={Math.max(10, process.stdout.rows - 4)}>
+      <Box marginBottom={1}><Text color="#d7dadc">
+        {`██╗    ██╗ ██████╗ ██████╗ ██████╗ ██╗███████╗\n`}
+        {`██║    ██║██╔═══██╗██╔══██╗██╔══██╗██║██╔════╝\n`}
+        {`██║ █╗ ██║██║   ██║██████╔╝██║  ██║██║█████╗  \n`}
+        {`██║███╗██║██║   ██║██╔══██╗██║  ██║██║██╔══╝  \n`}
+        {`╚███╔███╔╝╚██████╔╝██║  ██║██████╔╝██║███████╗\n`}
+        {` ╚══╝╚══╝  ╚═════╝ ╚═╝  ╚═╝╚═════╝ ╚═╝╚══════╝`}
+      </Text></Box>
+      <Text dimColor>Press any key to start…</Text>
     </Box>
   );
 }
