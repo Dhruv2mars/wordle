@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import { Box } from 'ink';
-import * as ansiEscapes from 'ansi-escapes';
+import ansiEscapes from 'ansi-escapes';
 
 type Props = {
   width: number;
