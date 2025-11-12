@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import { Box } from 'ink';
 import ansiEscapes from 'ansi-escapes';
+import { performance } from 'node:perf_hooks';
 
 type Props = {
   width: number;
@@ -61,4 +62,3 @@ function draw(kind: 'gradient', width: number, height: number, tms: number) {
   }
   process.stdout.write(out);
 }
-

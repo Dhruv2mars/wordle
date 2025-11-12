@@ -15,7 +15,7 @@
     "LICENSE"
   ],
   "scripts": {
-    "dev": "bun run --hot src/dev.ts",
+    "dev": "bun run src/cli.ts",
     "build": "bun x tsup --config tsup.config.ts",
     "start": "node dist/cli.js",
     "typecheck": "bun x tsc --noEmit",
@@ -54,4 +54,3 @@
     "@typescript-eslint/parser": "^7.6.0"
   }
 }
-
