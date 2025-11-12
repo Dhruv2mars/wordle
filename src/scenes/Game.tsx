@@ -111,7 +111,7 @@ export function Game() {
       </Box>
       <Box marginTop={1}>
         <Text color={message ? '#b59f3b' : undefined} dimColor={!message}>
-          {message || (done ? (win ? 'You win! — Ctrl+C to exit' : 'Out of rows — Ctrl+C to exit') : 'Type letters, Enter to submit, Backspace to edit')}
+          {message || (done ? (win ? 'You win! — Ctrl+Q to exit' : 'Out of rows — Ctrl+Q to exit') : 'Type letters, Enter to submit, Backspace to edit · Ctrl+Q to quit')}
         </Text>
       </Box>
     </Box>

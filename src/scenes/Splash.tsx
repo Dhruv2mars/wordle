@@ -16,7 +16,7 @@ export function Splash({ onStart }: Props) {
         {`╚███╔███╔╝╚██████╔╝██║  ██║██████╔╝██║███████╗\n`}
         {` ╚══╝╚══╝  ╚═════╝ ╚═╝  ╚═╝╚═════╝ ╚═╝╚══════╝`}
       </Text></Box>
-      <Text dimColor>Press any key to start…</Text>
+      <Text dimColor>Press any key to start · Ctrl+Q to quit</Text>
     </Box>
   );
 }
