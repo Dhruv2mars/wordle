@@ -47,7 +47,7 @@ function Row({ word, states }: { word: string; states: CellState[] }) {
   );
 }
 
-export function Game() {
+export function Game({ onEnd }: { onEnd: (s: { win: boolean; rows: number; states: ('g'|'y'|'b')[][]; answer: string }) => void }) {
   const answer = useMemo(() => (solutions[0] || 'ARISE').toUpperCase(), []);
   const [rows, setRows] = useState<string[]>([]);
   const [current, setCurrent] = useState('');
@@ -97,6 +97,11 @@ export function Game() {
     } else {
       boardRows.push({ word: '', st: Array<CellState>(WORD_LEN).fill('empty') });
     }
+  }
+
+  // Navigate to end screen when done
+  if (done) {
+    onEnd({ win, rows: rows.length, states: states as ('g'|'y'|'b')[][], answer });
   }
 
   return (
