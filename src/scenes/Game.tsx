@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { Box, Text, useInput } from 'ink';
 import chalk from 'chalk';
 import allowed from '../word/allowed.json';
@@ -55,6 +55,7 @@ export function Game({ onEnd }: { onEnd: (s: { win: boolean; rows: number; state
   const [message, setMessage] = useState<string>('');
   const [win, setWin] = useState(false);
   const done = win || rows.length === MAX_ROWS;
+  const signalled = useRef(false);
 
   useInput((input, key) => {
     if (done) return;
@@ -99,10 +100,15 @@ export function Game({ onEnd }: { onEnd: (s: { win: boolean; rows: number; state
     }
   }
 
-  // Navigate to end screen when done
-  if (done) {
-    onEnd({ win, rows: rows.length, states: states as ('g'|'y'|'b')[][], answer });
-  }
+  // Navigate to end screen when done (post-render to avoid setState during render)
+  useEffect(() => {
+    if (done && !signalled.current) {
+      signalled.current = true;
+      // Only pass the evaluated states up to number of rows actually submitted
+      const compact = states.slice(0, rows.length) as ('g'|'y'|'b')[][];
+      onEnd({ win, rows: rows.length, states: compact, answer });
+    }
+  }, [done, win, rows.length]);
 
   return (
     <Box flexDirection="column" alignItems="center" paddingY={1}>
