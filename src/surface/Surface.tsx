@@ -1,7 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import { Box } from 'ink';
-import ansiEscapes from 'ansi-escapes';
-import { performance } from 'node:perf_hooks';
+import * as ansiEscapes from 'ansi-escapes';
 
 type Props = {
   width: number;

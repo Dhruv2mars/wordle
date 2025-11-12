@@ -1,6 +1,6 @@
 import React from 'react';
-import { Box, Text } from 'ink';
-import { Splash } from './scenes/Splash.js';
+import { Box } from 'ink';
+import { Splash } from './scenes/Splash';
 
 export function App() {
   return (
@@ -9,4 +9,3 @@ export function App() {
     </Box>
   );
 }
-

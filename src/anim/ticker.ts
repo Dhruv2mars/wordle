@@ -1,7 +1,5 @@
 export type Tick = (now: number, dt: number) => void;
 
-import { performance } from 'node:perf_hooks';
-
 export class Ticker {
   private last = 0;
   private id: any = null;

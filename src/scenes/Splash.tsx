@@ -1,6 +1,6 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Box, Text } from 'ink';
-import { Surface } from '../surface/Surface.js';
+import { Surface } from '../surface/Surface';
 
 export function Splash() {
   // Simple animated logo with gradient background to validate pipeline.
