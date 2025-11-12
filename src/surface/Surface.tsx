@@ -42,11 +42,10 @@ function draw(kind: 'gradient', width: number, height: number, tms: number) {
   const h = Math.max(1, Math.floor(height));
 
   let out = '';
-  // Move cursor up h lines and to column start
+  // Anchor at top-left for now; save/restore cursor to avoid disturbing Ink cursor.
   out += ansiEscapes.cursorSavePosition;
-  out += ansiEscapes.cursorLeft;
   for (let y = 0; y < h; y++) {
-    out += ansiEscapes.cursorTo(1);
+    out += ansiEscapes.cursorTo(1, 1 + y);
     const row: string[] = [];
     for (let x = 0; x < w; x++) {
       const u = x / (w - 1 || 1);
@@ -58,7 +57,8 @@ function draw(kind: 'gradient', width: number, height: number, tms: number) {
     }
     // Reset and move down
     out += row.join('') + '\x1b[0m';
-    if (y < h - 1) out += '\n';
+    if (y < h - 1) out += '';
   }
+  out += ansiEscapes.cursorRestorePosition;
   process.stdout.write(out);
 }

@@ -4,7 +4,7 @@ export default defineConfig({
   entry: ['src/cli.ts'],
   outDir: 'dist',
   clean: true,
-  format: ['cjs'],
+  format: ['esm'],
   sourcemap: true,
   target: 'node18',
   minify: true,
@@ -13,4 +13,3 @@ export default defineConfig({
   platform: 'node',
   shims: false,
 });
-
