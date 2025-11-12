@@ -17,7 +17,7 @@
   "scripts": {
     "dev": "bun run src/cli.ts",
     "build": "bun x tsup --config tsup.config.ts",
-    "start": "node dist/cli.js",
+    "start": "bun run build && node dist/cli.js",
     "typecheck": "bun x tsc --noEmit",
     "lint": "bun x eslint . --ext .ts,.tsx"
   },
